@@ -63,6 +63,7 @@ fn output_progress(stderr: &mut Stderr, bytes: usize, elapsed: String, rate: f64
 
     let rate = style::style(format!(" [{:.0}b/s]", rate)).with(Color::Blue);
 
+    #[allow(deprecated)]
     let _ = execute!(
         stderr,
         cursor::MoveToColumn(0),
@@ -71,6 +72,7 @@ fn output_progress(stderr: &mut Stderr, bytes: usize, elapsed: String, rate: f64
         PrintStyledContent(elapsed),
         PrintStyledContent(rate),
     );
+
     let _ = stderr.flush();
 }
 
@@ -92,6 +94,7 @@ impl TimeOutput for u64 {
     /// Renders the u64 into a time string
     fn as_time(&self) -> String {
         let (hours, left) = (*self / 3600, *self % 3600);
+
         let (minutes, seconds) = (left / 60, left % 60);
 
         format!("{}:{:02}:{:02}", hours, minutes, seconds)
