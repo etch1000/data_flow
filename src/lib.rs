@@ -1,3 +1,5 @@
+//! Data Flow Library
+
 pub mod args;
 pub mod read;
 pub mod stats;
